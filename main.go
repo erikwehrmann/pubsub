@@ -23,9 +23,11 @@ func main() {
 	// Subscribe workers
 	loggerCh := bus.Subscribe("order.created")
 	emailCh := bus.Subscribe("order.created")
+	analyticsCh := bus.Subscribe("order.created")
 
 	subscribers.StartLogger(ctx, loggerCh)
 	subscribers.StartEmailSender(ctx, emailCh)
+	subscribers.StartAnalytics(ctx, analyticsCh)
 
 	server := &api.Server{Bus: bus}
 
